@@ -1,0 +1,14 @@
+[Unit]
+Description=Allow-list for Docker-published ports
+After=docker.service
+Requires=docker.service
+# Re-run whenever Docker restarts (Docker rebuilds its chains on start)
+PartOf=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/docker-port-firewall.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target docker.service
