@@ -8,3 +8,4 @@ cp check-disk-space.sh /usr/local/bin/ && chmod 755 /usr/local/bin/check-disk-sp
 echo "17 7 * * * root /usr/local/bin/check-disk-space.sh" > /etc/cron.d/check-disk-space
 /usr/local/bin/check-disk-space.sh   # first ping: the check should turn green
 ```
+   > **Cron ignores `/etc/cron.d` files that are group- or other-writable** (log: `INSECURE MODE`). If your umask is 002, run `chmod 644` on the file, or the job silently never runs.
